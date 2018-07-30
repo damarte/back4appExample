@@ -2,12 +2,15 @@
 
 # compiled output
 /dist
+/public
 /dist-server
 /tmp
 /out-tsc
 
 # dependencies
 /node_modules
+
+#
 
 # IDEs and editors
 /.idea
@@ -34,6 +37,8 @@ npm-debug.log
 yarn-error.log
 testem.log
 /typings
+/src/environments/**
+!/src/environments/empty
 
 # e2e
 /e2e/*.js

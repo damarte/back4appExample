@@ -1,0 +1,9 @@
+<p>
+  <button (click)="createMessage()">Create Message</button>
+  <button (click)="purgeMessages()">Purge Messages</button>
+</p>
+<ul>
+  <li *ngFor="let message of messages">
+    {{ message.get('data') }}
+  </li>
+</ul>
