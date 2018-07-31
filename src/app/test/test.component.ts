@@ -9,10 +9,7 @@ import { Parse } from 'parse';
 })
 export class TestComponent implements OnInit {
 
-  constructor() {
-    Parse.initialize(environment.PARSE_APP_ID, environment.PARSE_JS_KEY);
-    Parse.serverURL = environment.serverURL;
-  }
+  constructor() { }
 
   createUser() {
     const newUser = new Parse.User();
@@ -46,6 +43,8 @@ export class TestComponent implements OnInit {
   }
 
   ngOnInit() {
+    Parse.initialize(environment.PARSE_APP_ID, environment.PARSE_JS_KEY);
+    Parse.serverURL = environment.serverURL;
   }
 
 }

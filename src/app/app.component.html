@@ -1,7 +1,63 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<h1>{{title}}</h1>
-<nav>
-  <a routerLink="/test">Test</a>
-  <a routerLink="/live-queries">Live Queries</a>
-</nav>
-<router-outlet></router-outlet>
+<div *ngIf="authenticationService.isAuthenticated">
+    <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Examples</a>
+        <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+        <ul class="navbar-nav px-3">
+            <li class="nav-item text-nowrap">
+            <a class="nav-link" href="#" (click)="signOut()">Sign out</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+            <div class="sidebar-sticky">
+                <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                <span>Back4app</span>
+                <a class="d-flex align-items-center text-muted" href="#">
+                    <span data-feather="plus-circle"></span>
+                </a>
+                </h6>
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link" routerLinkActive="active" routerLink="/test">
+                        <span data-feather="file"></span>
+                        Test
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLinkActive="active" routerLink="/live-queries">
+                        <span data-feather="shopping-cart"></span>
+                        Live Queries
+                        </a>
+                    </li>
+                </ul>
+
+                <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                <span>Firebase</span>
+                <a class="d-flex align-items-center text-muted" href="#">
+                    <span data-feather="plus-circle"></span>
+                </a>
+                </h6>
+                <ul class="nav flex-column mb-2">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                        <span data-feather="file-text"></span>
+                        Text
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            </nav>
+
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+                <router-outlet *ngIf="authenticationService.isAuthenticated"></router-outlet>
+            </main>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="!authenticationService.isAuthenticated">
+    <router-outlet *ngIf="!authenticationService.isAuthenticated"></router-outlet>
+</div>

@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Parse } from 'parse';
-import { NonNullAssert } from '../../../node_modules/@angular/compiler';
 
 @Component({
   selector: 'app-live-queries',
@@ -13,13 +12,15 @@ export class LiveQueriesComponent implements OnInit, OnDestroy {
   messages = [];
   subscription = null;
 
-  constructor() {
+  constructor() { }
+
+  ngOnInit() {
     Parse.initialize(environment.PARSE_APP_ID, environment.PARSE_JS_KEY);
     Parse.serverURL = environment.serverURL;
     Parse.masterKey = environment.PARSE_MASTER_KEY;
 
     const Message = Parse.Object.extend('Message');
-    const query = new Parse.Query(Message);
+    let query = new Parse.Query(Message);
     query.descending('createdAt');
     const context = this;
     query.find({
@@ -30,9 +31,7 @@ export class LiveQueriesComponent implements OnInit, OnDestroy {
         console.error(error);
       }
     });
-  }
 
-  ngOnInit() {
     const client = new Parse.LiveQueryClient({
       applicationId: environment.PARSE_APP_ID,
       serverURL: environment.liveQueriesServerURL, // Example: 'wss://livequerytutorial.back4app.io'
@@ -41,11 +40,9 @@ export class LiveQueriesComponent implements OnInit, OnDestroy {
     });
     client.open();
 
-    const query = new Parse.Query('Message');
+    query = new Parse.Query('Message');
     query.descending('createdAt');
     this.subscription = client.subscribe(query);
-
-    const context = this;
 
     this.subscription.on('open', () => {
       console.log('subscription opened');
