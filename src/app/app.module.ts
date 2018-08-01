@@ -11,6 +11,7 @@ import { LiveQueriesComponent } from './live-queries/live-queries.component';
 import { LoginComponent } from './login/login.component';
 import { AuthorizatedGuard } from './guards/authorizated.guard';
 import { AuthenticationService } from './services/authentication.service';
+import { FilesComponent } from './files/files.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { AuthenticationService } from './services/authentication.service';
     TestComponent,
     LiveQueriesComponent,
     LoginComponent,
+    FilesComponent,
   ],
   imports: [
     BrowserModule,

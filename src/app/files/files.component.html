@@ -1,0 +1,34 @@
+<div class="mt-2">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name" placeholder="Name for file" formControlName="name">
+      </div>
+      <div class="form-group">
+        <label for="file">File</label>
+        <input type="file" id="file" (change)="onFileChange($event)" #fileInput>
+        <button type="button" class="btn btn-sm btn-default" (click)="clearFile()">clear file</button>
+      </div>
+      <button type="submit" [disabled]="form.invalid || loading" class="btn btn-success">Upload file <i class="fa fa-spinner fa-spin fa-fw" *ngIf="loading"></i></button>
+    </form>
+</div>
+
+<table class="table mt-2">
+    <thead>
+      <tr>
+        <th scope="col">File</th>
+        <th scope="col">Date</th>
+        <th scope="col">Preview</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let file of files">
+        <td>{{ file.get('name') }}</td>
+        <td>{{ file.get('createdAt') }}</td>
+        <td>
+          <img [src]="file.get('file').url()" style="width: 200px; height: auto;" />
+          {{file.get('file').name()}}
+        </td>
+      </tr>
+    </tbody>
+  </table>
